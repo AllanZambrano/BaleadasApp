@@ -1,0 +1,39 @@
+{% load leaflet_tags %}
+{% leaflet_css %}
+{% leaflet_js %}
+<style>
+
+    .leaflet-container {  /* all maps */
+        width:  600px;
+        height: 400px;
+    }
+
+    #specialbigmap {
+        height: 800px;
+    }
+
+    /* Resize the "display_raw" textbox */
+    .django-leaflet-raw-textarea {
+        width: 100%;
+    }
+
+</style>
+
+<div>
+    <h1>{{ city.name }}</h1>
+    {% leaflet_map "main" callback="map_init" %}
+</div>
+
+<script type="text/javascript">
+    function map_init(map, options) {
+        {% for marker in marker_list %}
+            var lon = "{{ marker.longitude }}";
+            var lat = "{{ marker.latitude }}";
+            // zoom to point & add it to map
+            map.setView([lat, lon], 12);
+            L.marker([lat, lon]).addTo(map);
+        {% endfor %}
+
+
+    }
+</script>
