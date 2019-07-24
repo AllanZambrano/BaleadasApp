@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'markers.apps.MarkersConfig',
     'django.contrib.gis',
-    'leaflet'
+    'leaflet',
+    'mapwidgets',
 ]
 
 MIDDLEWARE = [
@@ -69,10 +70,10 @@ WSGI_APPLICATION = 'Baleadas.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': '<dbname>',
-        'USER': '<user>',
-        'PASSWORD': '<password>',
-        'HOST': '',
+        'NAME': 'baleadas',
+        'USER': 'allan',
+        'PASSWORD': 'Tr4llzor',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -122,7 +123,16 @@ LEAFLET_CONFIG = {
     'DEFAULT_ZOOM': 16,
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 18,
+    'TILES':'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+}
 
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocation", [14.094523,-87.199559]),
+        ("markerFitZoom", 12),
+    ),
+    "GOOGLE_MAP_API_KEY": "AIzaSyAiGctSPuzJKXaoDf1OR7YsW9vAE0V7dAo"
 }
 
 # Activate Django-Heroku.

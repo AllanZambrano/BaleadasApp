@@ -4,17 +4,8 @@
 <style>
 
     .leaflet-container {  /* all maps */
-        width:  600px;
-        height: 400px;
-    }
-
-    #specialbigmap {
-        height: 800px;
-    }
-
-    /* Resize the "display_raw" textbox */
-    .django-leaflet-raw-textarea {
-        width: 100%;
+        width:  90vw;
+        height: 90vh;
     }
 
 </style>
@@ -30,7 +21,7 @@
             var lon = "{{ marker.longitude }}";
             var lat = "{{ marker.latitude }}";
             // zoom to point & add it to map
-            map.setView([lat, lon], 12);
+            map.setView([lat, lon], 14);
             L.marker([lat, lon]).addTo(map);
         {% endfor %}
 
