@@ -6,6 +6,8 @@ from mapwidgets.widgets import GooglePointFieldWidget
 
 
 class MarkerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'geom')
+    search_fields = ['name', ]
     formfield_overrides = {
         models.PointField: {"widget": GooglePointFieldWidget}
     }

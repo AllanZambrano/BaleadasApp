@@ -1,30 +1,35 @@
+{% extends 'base.html' %}
 {% load leaflet_tags %}
-{% leaflet_css %}
-{% leaflet_js %}
-<style>
+{% load geojson_tags %}
+
+{% block extra_assets %}
+  {% leaflet_js %}
+  {% leaflet_css %}
+    <style>
 
     .leaflet-container {  /* all maps */
-        width:  90vw;
-        height: 90vh;
+        width:  100%px;
+        height: 500px;
     }
+    </style>
+{% endblock %}
 
-</style>
+{% block content %}
 
-<div>
-    <h1>{{ city.name }}</h1>
-    {% leaflet_map "main" callback="map_init" %}
-</div>
+    <script type="text/javascript">
+      var collection = {{ marker_list|geojsonfeature:"popupContent"|safe }};
 
-<script type="text/javascript">
-    function map_init(map, options) {
-        {% for marker in marker_list %}
-            var lon = "{{ marker.longitude }}";
-            var lat = "{{ marker.latitude }}";
-            // zoom to point & add it to map
-            map.setView([lat, lon], 14);
-            L.marker([lat, lon]).addTo(map);
-        {% endfor %}
+      function onEachFeature(feature, layer) {
+        if (feature.properties && feature.properties.popupContent) {
+          layer.bindPopup(feature.properties.popupContent);
+        }
+      }
 
+      function map_init(map, options) {
+        L.geoJson(collection, {onEachFeature: onEachFeature}).addTo(map);
+      }
+    </script>
 
-    }
-</script>
+    {% leaflet_map "spots" callback="window.map_init" %}
+
+{% endblock %}

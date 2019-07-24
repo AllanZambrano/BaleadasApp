@@ -5,7 +5,7 @@ from .models import Marker
 class MarkerForm(forms.ModelForm):
     class Meta:
         model = Marker
-        fields = ("name", "point")
+        fields = ("name", "geom")
         widgets = {
-            'point': GooglePointFieldWidget,
+            'geom': GooglePointFieldWidget,
         }
