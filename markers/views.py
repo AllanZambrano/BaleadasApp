@@ -8,10 +8,10 @@ from django.contrib.messages.views import SuccessMessageMixin
 
 class Map(ListView):
     model = Marker
-    template_name = 'map.html'
+    template_name = 'index.html'
 
 class CreateEntry(SuccessMessageMixin,CreateView):
     form_class = MarkerForm
     template_name = 'add.html'
     success_message = "Marker was created successfully"
-    success_url = reverse_lazy('map')
+    success_url = reverse_lazy('index')

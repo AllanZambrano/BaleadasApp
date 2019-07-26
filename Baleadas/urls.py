@@ -18,7 +18,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('baleadas-super-admin/', admin.site.urls),
     path('', include('markers.urls')),
-    path('index/',TemplateView.as_view(template_name='index.html')),
+    path('index/',TemplateView.as_view(template_name='map.html')),
 ]

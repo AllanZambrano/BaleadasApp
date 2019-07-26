@@ -131,7 +131,7 @@ GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal204'
 #3rd party configs
 LEAFLET_CONFIG = {
     'DEFAULT_CENTER': (14.090594,-87.200484),
-    'DEFAULT_ZOOM': 14,
+    'DEFAULT_ZOOM': 15,
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 18,
     'TILES':'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
