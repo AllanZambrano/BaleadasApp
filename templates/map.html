@@ -15,7 +15,15 @@
 {% endblock %}
 
 {% block content %}
-
+    {% if messages %}
+        <article class="message is-success">
+          <div class="message-body">
+              {% for message in messages %}
+                  {{ message }}
+            {% endfor %}
+          </div>
+        </article>
+    {% endif %}
     <script type="text/javascript">
       var collection = {{ marker_list|geojsonfeature:"popupContent"|safe }};
 
