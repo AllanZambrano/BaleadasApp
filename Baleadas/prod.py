@@ -1,14 +1,5 @@
 import os
-if os.name == 'nt':
-    import platform
-    OSGEO4W = r"C:\OSGeo4W"
-    if '64' in platform.architecture()[0]:
-        OSGEO4W += "64"
-    assert os.path.isdir(OSGEO4W), "Directory does not exist: " + OSGEO4W
-    os.environ['OSGEO4W_ROOT'] = OSGEO4W
-    os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
-    os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
-    os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -18,12 +9,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '0!*f2y@5qaex)146jr_dlp@8ts2p*p53_k%kpbnyezw9u)9t+i'
+SECRET_KEY = '*!2#jqicj__$p82dgdbqg=lf7o3%o8f-ed2-99!nh4nm22-)2u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://baleadas.herokuapp.com/']
 
 
 # Application definition
@@ -37,8 +28,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'markers.apps.MarkersConfig',
     'django.contrib.gis',
-
-    # 3rd party
     'leaflet',
     'mapwidgets',
     'djgeojson',
@@ -75,19 +64,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Baleadas.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'baleadas',
-        'USER': 'postgres',
-        'PASSWORD': 'Tr4llzor',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -105,6 +81,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -123,10 +101,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = os.path.join(BASE_DIR, "static"),
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal204'
+
 
 #3rd party configs
 LEAFLET_CONFIG = {
@@ -148,4 +123,6 @@ MAP_WIDGETS = {
     "GOOGLE_MAP_API_KEY": "AIzaSyAiGctSPuzJKXaoDf1OR7YsW9vAE0V7dAo"
 }
 
-INTERNAL_IPS = ['127.0.0.1',]
+# Activate Django-Heroku.
+django_heroku.settings(locals())
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'

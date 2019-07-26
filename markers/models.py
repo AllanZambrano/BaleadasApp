@@ -3,7 +3,7 @@ from django.contrib.gis.db import models
 
 class Marker(models.Model):
     name = models.CharField(max_length=120)
-    geom = models.PointField()
+    geom = models.PointField('Coordinates')
 
     @property
     def longitude(self):
