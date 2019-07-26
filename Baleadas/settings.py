@@ -135,6 +135,8 @@ LEAFLET_CONFIG = {
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 18,
     'TILES':'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    'RESET_VIEW': False,
+    'SCALE': None
 }
 
 MAP_WIDGETS = {

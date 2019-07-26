@@ -9,7 +9,7 @@
 
     .leaflet-container {  /* all maps */
         width:  100%;
-        height: 35rem;
+        height: 100vh;
         z-index: 1;
     }
 
@@ -21,43 +21,31 @@
     .django-leaflet-raw-textarea {
         width: 100%;
     }
+    .over-map-top{
+        position: absolute;
+        top: 5px;
+        right: 10px;
+        z-index: 99;
+    }
+    .over-map-bottom{
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        z-index: 99;
+    }
 
 </style>
 {% endblock %}
 
 {% block content %}
     <div class="columns">
-        <div class="column is-4 has-text-centered">
-            <aside class="menu">
-                <p class="menu-label">
-                    Spots
-                </p>
-                <ul class="menu-list">
-                    <li><a>Dashboard</a></li>
-                    <li><a>Customers</a></li>
-                </ul>
-                <p class="menu-label">
-                    Administration
-                </p>
-              <ul class="menu-list">
-                <li><a>Team Settings</a></li>
-                <li>
-                  <a class="">Manage Your Team</a>
-                  <ul>
-                    <li><a>Members</a></li>
-                    <li><a>Plugins</a></li>
-                    <li><a>Add a member</a></li>
-                  </ul>
-                </li>
-                <li><a>Invitations</a></li>
-                <li><a>Cloud Storage Environment Settings</a></li>
-                <li><a>Authentication</a></li>
-              </ul>
-            </aside>
-      </div>
-      <div class="column">
-          {% leaflet_map "main" callback="window.map_init" %}
-          <script type="text/javascript">
+        <div class="column auto">
+            <a class="button is-success over-map-top" href="{% url 'add_entry' %}">Add a spot</a>
+            <a class="button is-primary over-map-bottom" href="https://github.com/AllanZambrano">Made with 💚 by AZ</a>
+            {% leaflet_map "main" callback="window.map_init" %}
+        </div>
+    </div>
+    <script type="text/javascript">
               var collection = {{ marker_list|geojsonfeature:"popupContent"|safe }};
 
               function onEachFeature(feature, layer) {
@@ -66,11 +54,9 @@
                 }
               }
 
+
               function map_init(map, options) {
                 L.geoJson(collection, {onEachFeature: onEachFeature}).addTo(map);
               }
           </script>
-      </div>
-    </div>
-
 {% endblock %}
