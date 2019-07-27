@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load leaflet_tags %}
 {% load geojson_tags %}
-
 {% block extra_assets %}
     {% leaflet_js %}
     {% leaflet_css %}
@@ -35,6 +34,8 @@
     }
 
 </style>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/dist/L.Control.Locate.min.css">
 {% endblock %}
 
 {% block content %}
@@ -46,17 +47,17 @@
         </div>
     </div>
     <script type="text/javascript">
-              var collection = {{ marker_list|geojsonfeature:"popupContent"|safe }};
+        var collection = {{ marker_list|geojsonfeature:"popupContent"|safe }};
+        function onEachFeature(feature, layer) {
+            if (feature.properties && feature.properties.popupContent) {
+                layer.bindPopup(feature.properties.popupContent);
+            }
+        }
+        function map_init(map, options) {
+            L.geoJson(collection, {onEachFeature: onEachFeature}).addTo(map);
+            L.control.locate().addTo(map);
+        }
 
-              function onEachFeature(feature, layer) {
-                if (feature.properties && feature.properties.popupContent) {
-                  layer.bindPopup(feature.properties.popupContent);
-                }
-              }
-
-
-              function map_init(map, options) {
-                L.geoJson(collection, {onEachFeature: onEachFeature}).addTo(map);
-              }
-          </script>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.67.0/src/L.Control.Locate.min.js"></script>
 {% endblock %}

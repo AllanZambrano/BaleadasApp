@@ -18,3 +18,5 @@ class Marker(models.Model):
     @property
     def popupContent(self):
       return self.name
+
+    # <img width="300" src="${props.picture_url}"/><h3>${props.title}</h3><p>${props.description}</p>

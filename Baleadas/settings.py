@@ -25,9 +25,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -108,13 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -129,7 +123,7 @@ GDAL_LIBRARY_PATH = r'C:\OSGeo4W\bin\gdal204'
 
 #3rd party configs
 LEAFLET_CONFIG = {
-    'DEFAULT_CENTER': (14.090594,-87.200484),
+    'DEFAULT_CENTER': (14.090594, -87.200484),
     'DEFAULT_ZOOM': 15,
     'MIN_ZOOM': 3,
     'MAX_ZOOM': 18,
@@ -137,5 +131,4 @@ LEAFLET_CONFIG = {
     'RESET_VIEW': False,
     'SCALE': None
 }
-
 INTERNAL_IPS = ['127.0.0.1',]
