@@ -40,7 +40,6 @@ INSTALLED_APPS = [
 
     # 3rd party
     'leaflet',
-    'mapwidgets',
     'djgeojson',
 ]
 
@@ -137,15 +136,6 @@ LEAFLET_CONFIG = {
     'TILES':'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
     'RESET_VIEW': False,
     'SCALE': None
-}
-
-MAP_WIDGETS = {
-    "GooglePointFieldWidget": (
-        ("zoom", 14),
-        ("mapCenterLocation", [14.094523,-87.199559]),
-        ("markerFitZoom", 12),
-    ),
-    "GOOGLE_MAP_API_KEY": "AIzaSyAiGctSPuzJKXaoDf1OR7YsW9vAE0V7dAo"
 }
 
 INTERNAL_IPS = ['127.0.0.1',]

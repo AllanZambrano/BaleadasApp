@@ -1,17 +1,13 @@
 from django.contrib import admin
 from django.contrib.gis.db import models
+from leaflet.admin import LeafletGeoAdmin
 from .models import Marker
-from mapwidgets.widgets import GooglePointFieldWidget
 
 
 
-class MarkerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'geom')
+class MarkerAdmin(LeafletGeoAdmin):
+    list_display = ('name', 'latitude', 'longitude')
     search_fields = ['name', ]
-    formfield_overrides = {
-        models.PointField: {"widget": GooglePointFieldWidget}
-    }
-
 
 admin.site.register(Marker, MarkerAdmin)
 
